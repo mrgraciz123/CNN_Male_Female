@@ -754,23 +754,23 @@ email_btn = f'<a href="mailto:{EMAIL}" class="social-btn social-btn-email">✉�
 
 st.markdown(f"""
 <div class="glass-card fade-in" style="text-align: center; border-bottom: 5px solid #ff007f; padding: 30px 20px;">
-    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: bold; color: #e2e8f0; margin-bottom: 5px;">Designed & Developed by {DEVELOPER_NAME}</div>
-    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; color: #ff007f; margin-bottom: 4px; font-weight: 600;">{ROLE}</div>
-    <div style="font-family: 'Outfit', sans-serif; font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">B.Tech Computer Science & Engineering</div>
-    
-    <div style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #64748b; margin-bottom: 20px;">
-        Powered by TensorFlow • Streamlit • Convolutional Neural Network
-    </div>
-    
-    <div class="dev-social-container">
-        {linkedin_btn}
-        {github_btn}
-        {portfolio_btn}
-        {email_btn}
-    </div>
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: bold; color: #e2e8f0; margin-bottom: 5px;">Designed & Developed by {DEVELOPER_NAME}</div>
+<div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; color: #ff007f; margin-bottom: 4px; font-weight: 600;">{ROLE}</div>
+<div style="font-family: 'Outfit', sans-serif; font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">B.Tech Computer Science & Engineering</div>
+
+<div style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #64748b; margin-bottom: 20px;">
+Powered by TensorFlow • Streamlit • Convolutional Neural Network
+</div>
+
+<div class="dev-social-container">
+{linkedin_btn}
+{github_btn}
+{portfolio_btn}
+{email_btn}
+</div>
 </div>
 
 <div style="text-align: center; padding: 10px 0 25px 0; color: #64748b; font-family: 'Share Tech Mono', monospace; font-size: 0.78rem; letter-spacing: 1px;">
-    © {datetime.now().year} NEXUS-CNN // ALL INTELLECTUAL MATRIX RESERVED.
+© {datetime.now().year} NEXUS-CNN // ALL INTELLECTUAL MATRIX RESERVED.
 </div>
 """, unsafe_allow_html=True)
