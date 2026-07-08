@@ -1077,9 +1077,30 @@ elif nav_selection == "📜 Prediction History":
 # ----------------------------------------------------
 # 13. PREMIUM FOOTER
 # ----------------------------------------------------
-st.markdown("<br><hr style='border: 0.5px solid rgba(255,255,255,0.05); margin-bottom: 20px;'>", unsafe_allow_html=True)
+st.markdown("<br><hr style='border: 0.5px solid rgba(255,255,255,0.05); margin-bottom: 10px;'>", unsafe_allow_html=True)
+
+# Format LinkedIn and social buttons dynamically
+linkedin_btn = f'<a href="{LINKEDIN_URL}" target="_blank" class="social-btn social-btn-linkedin">🔗 LinkedIn</a>' if LINKEDIN_URL else ''
+github_btn = f'<a href="{GITHUB_URL}" target="_blank" class="social-btn social-btn-github">💻 GitHub</a>' if GITHUB_URL else ''
+portfolio_btn = f'<a href="{PORTFOLIO_URL}" target="_blank" class="social-btn">🌐 Portfolio</a>' if PORTFOLIO_URL else ''
+email_btn = f'<a href="mailto:{EMAIL}" class="social-btn social-btn-email">✉️ Email</a>' if EMAIL else ''
+
 st.markdown(f"""
-<div style="text-align: center; padding: 10px 0 25px 0; color: #64748B; font-family: 'Inter', sans-serif; font-size: 0.78rem;">
+<div class="glass-card fade-in" style="text-align: center; border-bottom: 3px solid #3B82F6; padding: 25px 20px; margin-top: 15px; margin-bottom: 25px;">
+    <div style="font-family: 'Inter', sans-serif; font-size: 1.15rem; font-weight: bold; color: #e2e8f0; margin-bottom: 4px;">Designed & Developed by {DEVELOPER_NAME}</div>
+    <div style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #3B82F6; margin-bottom: 4px; font-weight: 600;">{ROLE}</div>
+    <div style="font-family: 'Inter', sans-serif; font-size: 0.78rem; color: #94a3b8; margin-bottom: 15px;">B.Tech Computer Science & Engineering</div>
+    <div class="dev-social-container" style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        {linkedin_btn}
+        {github_btn}
+        {portfolio_btn}
+        {email_btn}
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown(f"""
+<div style="text-align: center; padding: 0 0 25px 0; color: #64748B; font-family: 'Inter', sans-serif; font-size: 0.78rem;">
     Built with ❤️ using TensorFlow, OpenCV, Streamlit and Python<br>
     <span style="font-size: 0.7rem; color: #475569; letter-spacing: 0.5px; display: inline-block; margin-top: 5px;">© {datetime.now().year} {DEVELOPER_NAME} // ALL INTELLECTUAL MATRIX RESERVED.</span>
 </div>
