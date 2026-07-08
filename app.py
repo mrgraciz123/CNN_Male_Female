@@ -70,17 +70,13 @@ if "predicted_data" not in st.session_state:
 st.markdown("""
 <style>
     /* Import modern Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&family=Fira+Code:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
 
     /* Global settings and dark gradient background */
     html, body, [data-testid="stAppViewContainer"] {
-        background-color: #0b0c10 !important;
-        background-image: 
-            radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 45%),
-            radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.05) 0%, transparent 45%),
-            linear-gradient(rgba(18, 20, 29, 0.98), rgba(11, 12, 16, 0.99)) !important;
-        font-family: 'Outfit', sans-serif;
-        color: #e2e8f0;
+        background: radial-gradient(circle at 50% 50%, #0f172a 0%, #020617 100%) !important;
+        font-family: 'Inter', sans-serif;
+        color: #f1f5f9;
     }
     
     /* Remove default Streamlit bars & footer */
@@ -90,138 +86,121 @@ st.markdown("""
     
     /* Sidebar custom styling */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, #07080c 0%, #0b0c10 100%) !important;
-        border-right: 1px solid rgba(0, 243, 255, 0.15);
+        background-color: #0b0f19 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.05);
     }
     
     /* Fade-in and Slide animations */
     @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(12px); }
+        from { opacity: 0; transform: translateY(8px); }
         to { opacity: 1; transform: translateY(0); }
     }
     
     .fade-in {
-        animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        animation: fadeIn 0.4s ease-out forwards;
     }
     
     /* Floating icon animation */
     @keyframes float {
         0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
+        50% { transform: translateY(-4px); }
     }
     
     .float-icon {
         display: inline-block;
-        animation: float 3s ease-in-out infinite;
+        animation: float 4s ease-in-out infinite;
     }
     
-    /* Animated Gradient backgrounds */
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-    
-    .animated-gradient-text {
-        background: linear-gradient(90deg, #00f3ff, #ff007f, #00f3ff);
-        background-size: 200% auto;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientBG 6s linear infinite;
-    }
-    
-    /* Premium Glassmorphism Cards with Hover Effects */
+    /* Premium Slate Glass Cards */
     .glass-card {
-        background: rgba(15, 22, 42, 0.65);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-top: 1px solid rgba(0, 243, 255, 0.15);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-        padding: 30px;
-        margin-bottom: 25px;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        animation: fadeIn 0.5s ease-out;
+        background: rgba(30, 41, 59, 0.35);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid rgba(99, 102, 241, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        padding: 24px;
+        margin-bottom: 20px;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        animation: fadeIn 0.4s ease-out;
     }
     
     .glass-card:hover {
-        border-color: rgba(0, 243, 255, 0.25);
-        border-top-color: rgba(0, 243, 255, 0.6);
-        box-shadow: 0 30px 60px -15px rgba(0, 243, 255, 0.15);
-        transform: translateY(-5px);
+        border-color: rgba(99, 102, 241, 0.3);
+        border-top-color: rgba(99, 102, 241, 0.6);
+        box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.1);
+        transform: translateY(-2px);
     }
     
     /* Custom Error Cards for Error Handling */
     .glass-card-error {
-        background: rgba(239, 68, 68, 0.08);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(239, 68, 68, 0.25);
-        border-radius: 16px;
-        box-shadow: 0 8px 32px 0 rgba(239, 68, 68, 0.15), inset 0 0 10px rgba(239, 68, 68, 0.03);
-        padding: 20px;
-        margin-bottom: 25px;
+        background: rgba(239, 68, 68, 0.05);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(239, 68, 68, 0.2);
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        padding: 18px;
+        margin-bottom: 20px;
         color: #fca5a5;
-        font-family: 'Outfit', sans-serif;
-        animation: fadeIn 0.4s ease-out;
+        font-family: 'Inter', sans-serif;
     }
     
     .glass-card-accent {
-        background: rgba(15, 22, 42, 0.65);
-        backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 0, 127, 0.15);
-        border-top: 1px solid rgba(255, 0, 127, 0.3);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-        padding: 30px;
-        margin-bottom: 25px;
-        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        background: rgba(30, 41, 59, 0.35);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(99, 102, 241, 0.2);
+        border-top: 1px solid rgba(99, 102, 241, 0.4);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        padding: 24px;
+        margin-bottom: 20px;
+        transition: all 0.3s ease;
     }
     .glass-card-accent:hover {
-        border-color: rgba(255, 0, 127, 0.35);
-        border-top-color: rgba(255, 0, 127, 0.7);
-        box-shadow: 0 30px 60px -15px rgba(255, 0, 127, 0.15);
-        transform: translateY(-5px);
+        border-color: rgba(99, 102, 241, 0.4);
+        border-top-color: rgba(99, 102, 241, 0.8);
+        box-shadow: 0 20px 40px -10px rgba(99, 102, 241, 0.15);
     }
     
-    /* Customize Streamlit File Uploader Box */
+    /* File Uploader styling */
     [data-testid="stFileUploader"] {
-        background: rgba(15, 22, 42, 0.4) !important;
-        border: 1px dashed rgba(0, 243, 255, 0.3) !important;
-        border-radius: 16px !important;
-        padding: 10px !important;
-        transition: all 0.3s ease !important;
+        background: rgba(15, 23, 42, 0.2) !important;
+        border: 1px dashed rgba(99, 102, 241, 0.2) !important;
+        border-radius: 12px !important;
+        padding: 8px !important;
+        transition: all 0.2s ease !important;
     }
     [data-testid="stFileUploader"]:hover {
-        border-color: rgba(0, 243, 255, 0.7) !important;
-        background: rgba(15, 22, 42, 0.6) !important;
+        border-color: rgba(99, 102, 241, 0.5) !important;
+        background: rgba(15, 23, 42, 0.3) !important;
     }
     
     /* Futuristic Headers */
     .cyber-title {
-        font-family: 'Space Grotesk', sans-serif;
-        font-weight: 800;
-        font-size: 2.8rem;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 2.2rem;
         letter-spacing: -0.5px;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        color: #ffffff;
     }
     
     .cyber-subtitle {
-        font-family: 'Outfit', sans-serif;
+        font-family: 'Inter', sans-serif;
         color: #94a3b8;
-        font-size: 1.15rem;
-        margin-bottom: 5px;
-        font-weight: 300;
-        line-height: 1.6;
+        font-size: 1rem;
+        margin-bottom: 4px;
+        font-weight: 400;
+        line-height: 1.5;
     }
     
     /* Scanning overlay effect on image */
     .scan-container {
         position: relative;
         overflow: hidden;
-        border-radius: 16px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        transition: all 0.3s ease;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
     }
     
     @keyframes sweep {
@@ -234,53 +213,39 @@ st.markdown("""
         top: 0; left: 0; width: 100%; height: 100%;
         background: linear-gradient(
             to bottom,
-            rgba(0, 243, 255, 0) 0%,
-            rgba(0, 243, 255, 0.4) 48%,
-            #00f3ff 50%,
-            rgba(0, 243, 255, 0.4) 52%,
-            rgba(0, 243, 255, 0) 100%
+            rgba(99, 102, 241, 0) 0%,
+            rgba(99, 102, 241, 0.2) 48%,
+            #6366f1 50%,
+            rgba(99, 102, 241, 0.2) 52%,
+            rgba(99, 102, 241, 0) 100%
         );
-        background-size: 100% 200%;
-        animation: sweep 2s linear infinite;
+        animation: sweep 2.5s linear infinite;
         pointer-events: none;
         z-index: 5;
     }
     
-    /* Result badge styled with glowing border */
+    /* Result badge */
     .result-badge-container {
-        border-radius: 14px;
-        padding: 24px;
+        border-radius: 12px;
+        padding: 20px;
         text-align: center;
-        background: rgba(15, 23, 42, 0.6);
-        position: relative;
-        overflow: hidden;
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px solid rgba(255, 255, 255, 0.06);
     }
     
-    /* Animated glowing borders */
-    @keyframes border-glow-cyan {
-        0%, 100% { border-color: rgba(0, 243, 255, 0.2); box-shadow: 0 0 10px rgba(0, 243, 255, 0.1); }
-        50% { border-color: #00f3ff; box-shadow: 0 0 20px rgba(0, 243, 255, 0.3); }
+    .glow-blue {
+        border-top: 3px solid #3b82f6;
     }
-    @keyframes border-glow-magenta {
-        0%, 100% { border-color: rgba(255, 0, 127, 0.2); box-shadow: 0 0 10px rgba(255, 0, 127, 0.1); }
-        50% { border-color: #ff007f; box-shadow: 0 0 20px rgba(255, 0, 127, 0.3); }
-    }
-    
-    .glow-cyan {
-        border: 2px solid rgba(0, 243, 255, 0.2);
-        animation: border-glow-cyan 3s infinite;
-    }
-    .glow-magenta {
-        border: 2px solid rgba(255, 0, 127, 0.2);
-        animation: border-glow-magenta 3s infinite;
+    .glow-rose {
+        border-top: 3px solid #f43f5e;
     }
     
     /* Developer social button cards styling */
     .dev-social-container {
         display: flex;
         justify-content: center;
-        gap: 15px;
-        margin-top: 15px;
+        gap: 12px;
+        margin-top: 12px;
         flex-wrap: wrap;
     }
     
@@ -288,75 +253,67 @@ st.markdown("""
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 10px;
-        padding: 8px 16px;
-        color: #e2e8f0;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 8px;
+        padding: 6px 14px;
+        color: #cbd5e1;
         text-decoration: none;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-weight: 500;
-        font-size: 0.9rem;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
     }
     .social-btn:hover {
-        background: rgba(0, 243, 255, 0.1);
-        border-color: #00f3ff;
-        color: #00f3ff;
-        box-shadow: 0 0 15px rgba(0, 243, 255, 0.25);
-        transform: translateY(-3px);
+        background: rgba(99, 102, 241, 0.1);
+        border-color: #6366f1;
+        color: #6366f1;
+        transform: translateY(-2px);
     }
     
     .social-btn-linkedin:hover {
-        background: rgba(10, 102, 194, 0.1);
-        border-color: #0a66c2;
-        color: #0a66c2;
-        box-shadow: 0 0 15px rgba(10, 102, 194, 0.25);
+        background: rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+        color: #3b82f6;
     }
     
     .social-btn-github:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(255, 255, 255, 0.08);
         border-color: #ffffff;
         color: #ffffff;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
     
     .social-btn-email:hover {
-        background: rgba(255, 0, 127, 0.1);
-        border-color: #ff007f;
-        color: #ff007f;
-        box-shadow: 0 0 15px rgba(255, 0, 127, 0.25);
+        background: rgba(244, 63, 94, 0.1);
+        border-color: #f43f5e;
+        color: #f43f5e;
     }
     
-    /* Custom buttons override with scaling and transition */
+    /* Sleek Indigo Buttons */
     .stButton>button {
-        background: linear-gradient(135deg, #00f3ff 0%, #0077b6 100%) !important;
-        color: #050608 !important;
-        font-family: 'Space Grotesk', sans-serif !important;
-        font-weight: 700 !important;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        background: #6366f1 !important;
+        color: #ffffff !important;
+        font-family: 'Inter', sans-serif !important;
+        font-weight: 600 !important;
         border: none !important;
-        border-radius: 12px !important;
-        padding: 12px 28px !important;
-        box-shadow: 0 4px 20px rgba(0, 243, 255, 0.25) !important;
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        border-radius: 8px !important;
+        padding: 10px 24px !important;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.2) !important;
+        transition: all 0.2s ease !important;
         width: 100%;
     }
     .stButton>button:hover {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 6px 25px rgba(0, 243, 255, 0.45) !important;
-        color: #ffffff !important;
-        background: linear-gradient(135deg, #00f3ff 0%, #00b4d8 100%) !important;
+        background: #4f46e5 !important;
+        box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35) !important;
     }
     
     /* Code tag override styling */
     code {
         font-family: 'Fira Code', monospace !important;
-        background-color: rgba(255, 255, 255, 0.05) !important;
-        padding: 2px 6px !important;
+        background-color: rgba(99, 102, 241, 0.08) !important;
+        padding: 2px 4px !important;
         border-radius: 4px !important;
-        color: #00f3ff !important;
+        color: #818cf8 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -367,20 +324,20 @@ st.markdown("""
 with st.sidebar:
     st.markdown("""
     <div style="text-align: center; padding: 15px 0;" class="fade-in">
-        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; color: #00f3ff;">NEURAL PORTAL</div>
-        <div style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #94a3b8; margin-top: 5px;">SYS CONFIG // DIAGNOSTICS</div>
+        <div style="font-family: 'Inter', sans-serif; font-size: 1.3rem; font-weight: bold; letter-spacing: 0.5px; color: #6366f1;">NEURAL PORTAL</div>
+        <div style="font-family: 'Fira Code', monospace; font-size: 0.75rem; color: #64748b; margin-top: 5px;">SYS CONFIG // DIAGNOSTICS</div>
     </div>
     <hr style="border: 0.5px solid rgba(255,255,255,0.08); margin-bottom: 20px;">
     """, unsafe_allow_html=True)
     
     # Project Overview
-    st.markdown("<div style='font-family: \"Space Grotesk\", sans-serif; font-weight: bold; color: #e2e8f0; margin-bottom: 5px;'>PROJECT OVERVIEW</div>", unsafe_allow_html=True)
-    st.markdown("<p style='font-size: 0.88rem; color: #94a3b8; line-height: 1.5;'>This system utilizes a deep Convolutional Neural Network (CNN) trained to detect high-level abstract facial components to perform binary gender classification.</p>", unsafe_allow_html=True)
+    st.markdown("<div style='font-family: \"Inter\", sans-serif; font-weight: 600; color: #e2e8f0; margin-bottom: 5px; font-size: 0.85rem;'>PROJECT OVERVIEW</div>", unsafe_allow_html=True)
+    st.markdown("<p style='font-size: 0.82rem; color: #94a3b8; line-height: 1.5;'>This system utilizes a deep Convolutional Neural Network (CNN) trained to detect high-level abstract facial components to perform binary gender classification.</p>", unsafe_allow_html=True)
     
     # Technologies Used
-    st.markdown("<div style='font-family: \"Space Grotesk\", sans-serif; font-weight: bold; color: #e2e8f0; margin-top: 20px; margin-bottom: 5px;'>TECHNOLOGIES</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-family: \"Inter\", sans-serif; font-weight: 600; color: #e2e8f0; margin-top: 20px; margin-bottom: 5px; font-size: 0.85rem;'>TECHNOLOGIES</div>", unsafe_allow_html=True)
     st.markdown("""
-    <ul style='font-size: 0.88rem; color: #94a3b8; padding-left: 18px; margin: 0;'>
+    <ul style='font-size: 0.82rem; color: #94a3b8; padding-left: 18px; margin: 0; line-height: 1.6;'>
         <li>TensorFlow (Deep Learning Core)</li>
         <li>Streamlit (Web Framework)</li>
         <li>Keras 3 Engine</li>
@@ -390,25 +347,25 @@ with st.sidebar:
     """, unsafe_allow_html=True)
     
     # CNN Model Details
-    st.markdown("<div style='font-family: \"Space Grotesk\", sans-serif; font-weight: bold; color: #e2e8f0; margin-top: 20px; margin-bottom: 5px;'>CNN MODEL DETAILS</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-family: \"Inter\", sans-serif; font-weight: 600; color: #e2e8f0; margin-top: 20px; margin-bottom: 5px; font-size: 0.85rem;'>CNN MODEL DETAILS</div>", unsafe_allow_html=True)
     st.markdown(f"""
-    <div style='background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; font-family: "Fira Code", monospace; font-size: 0.8rem;'>
-        <div style='margin-bottom: 4px;'>Layers: <span style='color: #00f3ff;'>9</span></div>
-        <div style='margin-bottom: 4px;'>Input: <span style='color: #00f3ff;'>150x150x3</span></div>
-        <div style='margin-bottom: 4px;'>Conv Blocks: <span style='color: #00f3ff;'>3 (Conv2D)</span></div>
-        <div style='margin-bottom: 4px;'>Pooling: <span style='color: #00f3ff;'>3 (MaxPool2D)</span></div>
-        <div>Sigmoid Node: <span style='color: #00f3ff;'>1</span></div>
+    <div style='background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 8px; padding: 12px; font-family: "Fira Code", monospace; font-size: 0.78rem;'>
+        <div style='margin-bottom: 4px;'>Layers: <span style='color: #6366f1;'>9</span></div>
+        <div style='margin-bottom: 4px;'>Input: <span style='color: #6366f1;'>150x150x3</span></div>
+        <div style='margin-bottom: 4px;'>Conv Blocks: <span style='color: #6366f1;'>3 (Conv2D)</span></div>
+        <div style='margin-bottom: 4px;'>Pooling: <span style='color: #6366f1;'>3 (MaxPool2D)</span></div>
+        <div>Sigmoid Node: <span style='color: #6366f1;'>1</span></div>
     </div>
     """, unsafe_allow_html=True)
     
     # Versions & Accuracy
-    st.markdown("<div style='font-family: \"Space Grotesk\", sans-serif; font-weight: bold; color: #e2e8f0; margin-top: 20px; margin-bottom: 5px;'>SYSTEM METRICS</div>", unsafe_allow_html=True)
+    st.markdown("<div style='font-family: \"Inter\", sans-serif; font-weight: 600; color: #e2e8f0; margin-top: 20px; margin-bottom: 5px; font-size: 0.85rem;'>SYSTEM METRICS</div>", unsafe_allow_html=True)
     st.markdown(f"""
-    <div style='background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 12px; font-family: "Fira Code", monospace; font-size: 0.8rem;'>
-        <div style='margin-bottom: 4px;'>TensorFlow: <span style='color: #ff007f;'>{"v" + tf.__version__ if TENSORFLOW_AVAILABLE else "OFFLINE"}</span></div>
-        <div style='margin-bottom: 4px;'>Streamlit: <span style='color: #ff007f;'>v{st.__version__}</span></div>
-        <div style='margin-bottom: 4px;'>Train Acc: <span style='color: #ff007f;'>74.07%</span></div>
-        <div>Val Acc: <span style='color: #ff007f;'>64.81%</span></div>
+    <div style='background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.04); border-radius: 8px; padding: 12px; font-family: "Fira Code", monospace; font-size: 0.78rem;'>
+        <div style='margin-bottom: 4px;'>TensorFlow: <span style='color: #6366f1;'>{"v" + tf.__version__ if TENSORFLOW_AVAILABLE else "OFFLINE"}</span></div>
+        <div style='margin-bottom: 4px;'>Streamlit: <span style='color: #6366f1;'>v{st.__version__}</span></div>
+        <div style='margin-bottom: 4px;'>Train Acc: <span style='color: #6366f1;'>74.07%</span></div>
+        <div>Val Acc: <span style='color: #6366f1;'>64.81%</span></div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -417,8 +374,8 @@ with st.sidebar:
 # ----------------------------------------------------
 st.markdown("<br>", unsafe_allow_html=True)
 st.markdown("""
-<div class="glass-card fade-in" style="text-align: center; border-left: 5px solid #00f3ff; margin-bottom: 30px;">
-    <div class="cyber-title"><span class="float-icon">🧠</span> <span class="animated-gradient-text">AI Gender Classification System</span></div>
+<div class="glass-card fade-in" style="text-align: center; border-left: 4px solid #6366f1; margin-bottom: 25px; padding: 20px;">
+    <div class="cyber-title">AI Gender Classification System</div>
     <div class="cyber-subtitle">Upload an image and let AI predict the gender using a CNN Deep Learning model.</div>
 </div>
 """, unsafe_allow_html=True)
@@ -428,9 +385,9 @@ st.markdown("""
 # ----------------------------------------------------
 if model == "simulation_mode":
     st.markdown("""
-    <div class="glass-card-accent" style="border-left: 5px solid #ff007f; padding: 20px; margin-bottom: 25px;">
-        <div style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; font-size: 1.1rem; color: #ff007f; margin-bottom: 8px;">🚀 Optimized Edge Simulation Core Active</div>
-        <p style="margin: 0; font-size: 0.9rem; line-height: 1.5; color: #e2e8f0;">
+    <div class="glass-card-accent" style="border-left: 4px solid #6366f1; padding: 18px; margin-bottom: 20px;">
+        <div style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; color: #818cf8; margin-bottom: 6px;">🚀 Optimized Edge Simulation Core Active</div>
+        <p style="margin: 0; font-size: 0.85rem; line-height: 1.5; color: #cbd5e1;">
             TensorFlow is not loaded in this environment. The system has automatically fallen back to the 
             <strong>Custom Matrix Simulation Engine</strong> using Pillow and NumPy to verify classification pathways safely.
         </p>
@@ -438,9 +395,9 @@ if model == "simulation_mode":
     """, unsafe_allow_html=True)
 elif model is None:
     st.markdown("""
-    <div class="glass-card-error">
-        <div style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; font-size: 1.1rem; margin-bottom: 8px;">⚠️ Neural Core offline: Missing Model File</div>
-        <p style="margin: 0; font-size: 0.9rem; line-height: 1.5;">
+    <div class="glass-card-error" style="border-left: 4px solid #ef4444;">
+        <div style="font-family: 'Inter', sans-serif; font-weight: 600; font-size: 1rem; margin-bottom: 6px;">⚠️ Neural Core offline: Missing Model File</div>
+        <p style="margin: 0; font-size: 0.85rem; line-height: 1.5;">
             The model binary could not be initialized from local disk. Please check that a valid 
             <code>gender_classifier.keras</code> or <code>binary_image_classifier.h5</code> file is present in your space root directory.
         </p>
@@ -454,7 +411,7 @@ col_up_l, col_up_r = st.columns([1, 1.2])
 
 with col_up_l:
     st.markdown("<div class='glass-card fade-in'>", unsafe_allow_html=True)
-    st.markdown("<h4 style='font-family: \"Space Grotesk\", sans-serif; color: #00f3ff; margin-top: 0; margin-bottom: 15px;'>UPLOAD ANALYSIS TARGET</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='font-family: \"Inter\", sans-serif; color: #6366f1; margin-top: 0; margin-bottom: 12px; font-size: 1rem; font-weight: 600;'>UPLOAD ANALYSIS TARGET</h4>", unsafe_allow_html=True)
     
     # File Uploader
     uploaded_file = st.file_uploader(
@@ -493,13 +450,13 @@ with col_up_l:
             img_w, img_h = img.size
             
             st.markdown(f"""
-            <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 12px; padding: 15px; font-size: 0.88rem; line-height: 1.6;">
-                <div style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; color: #00f3ff; margin-bottom: 8px; text-transform: uppercase;">Target Metadata</div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #94a3b8;">
-                    <div>File Name:</div><div style="color: #e2e8f0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{uploaded_file.name}</div>
-                    <div>Format:</div><div style="color: #e2e8f0;">{img.format}</div>
-                    <div>Dimensions:</div><div style="color: #e2e8f0;">{img_w} x {img_h} px</div>
-                    <div>File Size:</div><div style="color: #e2e8f0;">{file_size_kb:.2f} KB</div>
+            <div style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 12px; font-size: 0.85rem; line-height: 1.6;">
+                <div style="font-family: 'Inter', sans-serif; font-weight: 600; color: #6366f1; margin-bottom: 6px; text-transform: uppercase; font-size: 0.8rem;">Target Metadata</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-family: 'Fira Code', monospace; font-size: 0.78rem; color: #94a3b8;">
+                    <div>File Name:</div><div style="color: #cbd5e1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{uploaded_file.name}</div>
+                    <div>Format:</div><div style="color: #cbd5e1;">{img.format}</div>
+                    <div>Dimensions:</div><div style="color: #cbd5e1;">{img_w} x {img_h} px</div>
+                    <div>File Size:</div><div style="color: #cbd5e1;">{file_size_kb:.2f} KB</div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -507,7 +464,7 @@ with col_up_l:
             # 14. Error alert: Unsupported or corrupted format
             st.markdown("""
             <div class="glass-card-error">
-                <div style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; font-size: 1rem; margin-bottom: 6px;">❌ Invalid Target Image</div>
+                <div style="font-family: 'Inter', sans-serif; font-weight: bold; font-size: 1rem; margin-bottom: 6px;">❌ Invalid Target Image</div>
                 <p style="margin: 0; font-size: 0.85rem; line-height: 1.4;">
                     The uploaded file is corrupted or in an unsupported format. Please verify it is a valid JPEG or PNG image.
                 </p>
@@ -519,10 +476,10 @@ with col_up_l:
         
         # Waiting state
         st.markdown("""
-        <div style="border: 2px dashed rgba(0, 243, 255, 0.2); border-radius: 16px; height: 320px; display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(30, 41, 59, 0.1);">
+        <div style="border: 2px dashed rgba(99, 102, 241, 0.2); border-radius: 16px; height: 320px; display: flex; align-items: center; justify-content: center; flex-direction: column; background: rgba(30, 41, 59, 0.2);">
             <div style="font-size: 3rem; margin-bottom: 15px;" class="float-icon">📥</div>
-            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; color: #94a3b8; font-weight: 600;">AWAITING FILE TARGET</div>
-            <div style="font-family: 'Outfit', sans-serif; font-size: 0.85rem; color: #64748b; margin-top: 5px;">Drag & drop image file to mount neural matrix</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 1.1rem; color: #94a3b8; font-weight: 600;">AWAITING FILE TARGET</div>
+            <div style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #64748b; margin-top: 5px;">Drag & drop image file to mount neural matrix</div>
         </div>
         """, unsafe_allow_html=True)
         
@@ -533,7 +490,7 @@ with col_up_l:
 # ----------------------------------------------------
 with col_up_r:
     st.markdown("<div class='glass-card fade-in'>", unsafe_allow_html=True)
-    st.markdown("<h4 style='font-family: \"Space Grotesk\", sans-serif; color: #00f3ff; margin-top: 0; margin-bottom: 20px;'>NEURAL SYSTEM PROCESSOR</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 style='font-family: \"Inter\", sans-serif; color: #6366f1; margin-top: 0; margin-bottom: 20px; font-size: 1rem; font-weight: 600;'>NEURAL SYSTEM PROCESSOR</h4>", unsafe_allow_html=True)
     
     if uploaded_file is not None and is_valid_image and img is not None:
         if st.session_state.scan_phase == "idle":
@@ -564,7 +521,7 @@ with col_up_r:
             for step_lbl, progress_ratio, pct_start in scanning_steps:
                 # Smooth animation of percentage value increment
                 for pct in range(pct_start, int(progress_ratio * 100) + 1):
-                    percentage_text.markdown(f"<div style='text-align: center; font-family: \"Space Grotesk\", sans-serif; font-size: 1.8rem; font-weight: bold; color: #00f3ff;'>{pct}%</div>", unsafe_allow_html=True)
+                    percentage_text.markdown(f"<div style='text-align: center; font-family: \"Inter\", sans-serif; font-size: 1.8rem; font-weight: bold; color: #6366f1;'>{pct}%</div>", unsafe_allow_html=True)
                     time.sleep(0.012)
                 
                 status_text.markdown(f"<div style='font-family: \"Fira Code\", monospace; font-size: 0.9rem; color: #e2e8f0; margin-bottom: 8px;'>[PROCESSOR]: {step_lbl}</div>", unsafe_allow_html=True)
@@ -630,7 +587,7 @@ with col_up_r:
                 st.session_state.predicted_data = None
                 st.markdown(f"""
                 <div class="glass-card-error">
-                    <div style="font-family: 'Space Grotesk', sans-serif; font-weight: bold; font-size: 1rem; margin-bottom: 6px;">❌ Prediction Execution Failure</div>
+                    <div style="font-family: 'Inter', sans-serif; font-weight: bold; font-size: 1rem; margin-bottom: 6px;">❌ Prediction Execution Failure</div>
                     <p style="margin: 0; font-size: 0.85rem; line-height: 1.4;">
                         Neural network inference halted. Reason: <code>{str(e)}</code>. Please verify model validity.
                     </p>
@@ -644,14 +601,14 @@ with col_up_r:
             pred_score = data["probability"]
             latency = data["latency"]
             
-            glow_class = "glow-cyan" if pred_class == "Male" else "glow-magenta"
-            accent_color = "#00f3ff" if pred_class == "Male" else "#ff007f"
+            glow_class = "glow-blue" if pred_class == "Male" else "glow-rose"
+            accent_color = "#3b82f6" if pred_class == "Male" else "#f43f5e"
             
             # 6. Prediction Result card
             st.markdown(f"""
             <div class="result-badge-container {glow_class} fade-in">
-                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">NEURAL CLASSIFICATION MATRIX</div>
-                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 2.5rem; font-weight: 800; color: {accent_color}; margin: 15px 0;">{pred_class}</div>
+                <div style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">NEURAL CLASSIFICATION MATRIX</div>
+                <div style="font-family: 'Inter', sans-serif; font-size: 2.5rem; font-weight: 800; color: {accent_color}; margin: 15px 0;">{pred_class}</div>
                 <div style="display: flex; justify-content: space-around; gap: 10px; margin-top: 15px; flex-wrap: wrap;">
                     <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; min-width: 100px;">
                         <div style="font-size: 0.75rem; color: #94a3b8;">CONFIDENCE</div>
@@ -675,7 +632,7 @@ with col_up_r:
                 mode = "gauge+number",
                 value = confidence,
                 domain = {'x': [0, 1], 'y': [0, 1]},
-                title = {'text': "Prediction Confidence Signal (%)", 'font': {'color': '#e2e8f0', 'family': 'Space Grotesk', 'size': 14}},
+                title = {'text': "Prediction Confidence Signal (%)", 'font': {'color': '#e2e8f0', 'family': 'Inter', 'size': 14}},
                 number = {'font': {'color': '#ffffff', 'family': 'Fira Code'}},
                 gauge = {
                     'axis': {'range': [50, 100], 'tickwidth': 1, 'tickcolor': "#94a3b8"},
@@ -685,8 +642,8 @@ with col_up_r:
                     'bordercolor': "rgba(255, 255, 255, 0.1)",
                     'steps': [
                         {'range': [50, 75], 'color': 'rgba(255, 255, 255, 0.02)'},
-                        {'range': [75, 90], 'color': 'rgba(0, 243, 255, 0.04)'},
-                        {'range': [90, 100], 'color': 'rgba(0, 243, 255, 0.12)'}
+                        {'range': [75, 90], 'color': 'rgba(99, 102, 241, 0.04)'},
+                        {'range': [90, 100], 'color': 'rgba(99, 102, 241, 0.12)'}
                     ],
                 }
             ))
@@ -712,7 +669,7 @@ with col_up_r:
 # 9. PREDICTION HISTORY TABLE
 # ----------------------------------------------------
 st.markdown("<div class='glass-card fade-in'>", unsafe_allow_html=True)
-st.markdown("<h4 style='font-family: \"Space Grotesk\", sans-serif; color: #00f3ff; margin-top: 0; margin-bottom: 20px;'>📊 PREDICTION ARCHIVE FEED</h4>", unsafe_allow_html=True)
+st.markdown("<h4 style='font-family: \"Inter\", sans-serif; color: #6366f1; margin-top: 0; margin-bottom: 20px; font-size: 1rem; font-weight: 600;'>📊 PREDICTION ARCHIVE FEED</h4>", unsafe_allow_html=True)
 
 if len(st.session_state.history) > 0:
     st.table(st.session_state.history)
@@ -724,7 +681,7 @@ if len(st.session_state.history) > 0:
             st.rerun()
 else:
     st.markdown("""
-    <div style="text-align: center; color: #64748b; font-family: 'Space Grotesk', sans-serif; font-size: 0.9rem; padding: 20px 0;">
+    <div style="text-align: center; color: #64748b; font-family: 'Inter', sans-serif; font-size: 0.9rem; padding: 20px 0;">
         SYSTEM HISTORY REGISTER EMPTY // No logs stored in session cache
     </div>
     """, unsafe_allow_html=True)
@@ -736,7 +693,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 # ----------------------------------------------------
 with st.expander("📚 UNDERSTANDING THE NEURAL DIAGNOSTIC PROCESS"):
     st.markdown(r"""
-    <h4 style="color: #00f3ff; font-family: 'Space Grotesk', sans-serif; margin-top: 10px;">1. Image Preprocessing</h4>
+    <h4 style="color: #6366f1; font-family: 'Inter', sans-serif; margin-top: 10px;">1. Image Preprocessing</h4>
     <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin-bottom: 15px;">
         To ensure model matrix consistency, inputs undergo specific tensor reshaping:
         <ul>
@@ -747,7 +704,7 @@ with st.expander("📚 UNDERSTANDING THE NEURAL DIAGNOSTIC PROCESS"):
         </ul>
     </p>
     
-    <h4 style="color: #00f3ff; font-family: 'Space Grotesk', sans-serif; margin-top: 10px;">2. Convolution & Pooling operations</h4>
+    <h4 style="color: #6366f1; font-family: 'Inter', sans-serif; margin-top: 10px;">2. Convolution & Pooling operations</h4>
     <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin-bottom: 15px;">
         The compiled CNN relies on sequential Conv2D & MaxPooling structures:
         <ul>
@@ -756,7 +713,7 @@ with st.expander("📚 UNDERSTANDING THE NEURAL DIAGNOSTIC PROCESS"):
         </ul>
     </p>
     
-    <h4 style="color: #00f3ff; font-family: 'Space Grotesk', sans-serif; margin-top: 10px;">3. Dense Classification & Sigmoid Thresholding</h4>
+    <h4 style="color: #6366f1; font-family: 'Inter', sans-serif; margin-top: 10px;">3. Dense Classification & Sigmoid Thresholding</h4>
     <p style="color: #94a3b8; font-size: 0.92rem; line-height: 1.6; margin-bottom: 10px;">
         Once Conv2D outputs are flattened into a 1D vector (size 36,992 parameters), fully connected dense layers extract semantic properties. 
         The final output node uses a <strong>Sigmoid Activation Function</strong>:
@@ -777,10 +734,10 @@ portfolio_btn = f'<a href="{PORTFOLIO_URL}" target="_blank" class="social-btn">�
 email_btn = f'<a href="mailto:{EMAIL}" class="social-btn social-btn-email">✉️ Email</a>' if EMAIL else ''
 
 st.markdown(f"""
-<div class="glass-card fade-in" style="text-align: center; border-bottom: 5px solid #ff007f; padding: 30px 20px;">
-<div style="font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; font-weight: bold; color: #e2e8f0; margin-bottom: 5px;">Designed & Developed by {DEVELOPER_NAME}</div>
-<div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; color: #ff007f; margin-bottom: 4px; font-weight: 600;">{ROLE}</div>
-<div style="font-family: 'Outfit', sans-serif; font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">B.Tech Computer Science & Engineering</div>
+<div class="glass-card fade-in" style="text-align: center; border-bottom: 3px solid #6366f1; padding: 30px 20px;">
+<div style="font-family: 'Inter', sans-serif; font-size: 1.4rem; font-weight: bold; color: #e2e8f0; margin-bottom: 5px;">Designed & Developed by {DEVELOPER_NAME}</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.95rem; color: #6366f1; margin-bottom: 4px; font-weight: 600;">{ROLE}</div>
+<div style="font-family: 'Inter', sans-serif; font-size: 0.88rem; color: #94a3b8; margin-bottom: 12px;">B.Tech Computer Science & Engineering</div>
 
 <div style="font-family: 'Fira Code', monospace; font-size: 0.8rem; color: #64748b; margin-bottom: 20px;">
 Powered by TensorFlow • Streamlit • Convolutional Neural Network
