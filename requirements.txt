@@ -1,5 +1,5 @@
 streamlit>=1.30.0
-tensorflow>=2.15.0,<2.16.0
-numpy>=1.23.5,<1.25.0
+tensorflow>=2.16.0
+numpy>=1.23.5
 pillow>=9.5.0
 plotly>=5.15.0
