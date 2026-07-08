@@ -17,7 +17,7 @@ import plotly.graph_objects as go
 DEVELOPER_NAME = "Ankit Yadav"
 ROLE = "AI & ML Enthusiast"
 LINKEDIN_URL = ""
-GITHUB_URL = "https://github.com/AnkitYadav10533/project_AI_ML_Generative_AI"
+GITHUB_URL = "https://github.com/mrgraciz123/CNN_Male_Female"
 PORTFOLIO_URL = "https://ankityadav10533.github.io/ankit-portfolio/"
 EMAIL = "adityayadav10533@gmail.com"
 
