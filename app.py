@@ -14,12 +14,12 @@ import plotly.graph_objects as go
 # ----------------------------------------------------
 # 11. DEVELOPER SECTION CONSTANTS
 # ----------------------------------------------------
-DEVELOPER_NAME = "Ankit Yadav"
+DEVELOPER_NAME = "Abhay Shanker Tiwari"
 ROLE = "AI & ML Enthusiast"
-LINKEDIN_URL = ""
+LINKEDIN_URL = "https://www.linkedin.com/in/abhayshankertiwari"
 GITHUB_URL = "https://github.com/mrgraciz123/CNN_Male_Female"
-PORTFOLIO_URL = "https://ankityadav10533.github.io/ankit-portfolio/"
-EMAIL = "adityayadav10533@gmail.com"
+PORTFOLIO_URL = "https://github.com/mrgraciz123"
+EMAIL = "abhaylibra15@gmail.com"
 
 # Set page configuration for a premium dark theme web app
 st.set_page_config(
@@ -74,7 +74,11 @@ st.markdown("""
 
     /* Global settings and dark gradient background */
     html, body, [data-testid="stAppViewContainer"] {
-        background: radial-gradient(circle at top right, #1a1b26 0%, #0d0e15 100%) !important;
+        background-color: #0b0c10 !important;
+        background-image: 
+            radial-gradient(circle at 10% 20%, rgba(0, 243, 255, 0.05) 0%, transparent 45%),
+            radial-gradient(circle at 90% 80%, rgba(255, 0, 127, 0.05) 0%, transparent 45%),
+            linear-gradient(rgba(18, 20, 29, 0.98), rgba(11, 12, 16, 0.99)) !important;
         font-family: 'Outfit', sans-serif;
         color: #e2e8f0;
     }
@@ -86,7 +90,7 @@ st.markdown("""
     
     /* Sidebar custom styling */
     [data-testid="stSidebar"] {
-        background-color: #0b0c10 !important;
+        background: linear-gradient(180deg, #07080c 0%, #0b0c10 100%) !important;
         border-right: 1px solid rgba(0, 243, 255, 0.15);
     }
     
@@ -128,12 +132,13 @@ st.markdown("""
     
     /* Premium Glassmorphism Cards with Hover Effects */
     .glass-card {
-        background: rgba(30, 41, 59, 0.4);
+        background: rgba(15, 22, 42, 0.65);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(0, 243, 255, 0.15);
         border-radius: 20px;
-        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.02);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
         padding: 30px;
         margin-bottom: 25px;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -141,9 +146,10 @@ st.markdown("""
     }
     
     .glass-card:hover {
-        border-color: rgba(0, 243, 255, 0.3);
-        box-shadow: 0 16px 50px 0 rgba(0, 243, 255, 0.12), inset 0 0 20px rgba(0, 243, 255, 0.05);
-        transform: translateY(-4px) scale(1.005);
+        border-color: rgba(0, 243, 255, 0.25);
+        border-top-color: rgba(0, 243, 255, 0.6);
+        box-shadow: 0 30px 60px -15px rgba(0, 243, 255, 0.15);
+        transform: translateY(-5px);
     }
     
     /* Custom Error Cards for Error Handling */
@@ -161,19 +167,34 @@ st.markdown("""
     }
     
     .glass-card-accent {
-        background: rgba(30, 41, 59, 0.45);
+        background: rgba(15, 22, 42, 0.65);
         backdrop-filter: blur(16px);
         border: 1px solid rgba(255, 0, 127, 0.15);
+        border-top: 1px solid rgba(255, 0, 127, 0.3);
         border-radius: 20px;
-        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.5);
+        box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
         padding: 30px;
         margin-bottom: 25px;
         transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .glass-card-accent:hover {
         border-color: rgba(255, 0, 127, 0.35);
-        box-shadow: 0 16px 50px 0 rgba(255, 0, 127, 0.12);
-        transform: translateY(-4px);
+        border-top-color: rgba(255, 0, 127, 0.7);
+        box-shadow: 0 30px 60px -15px rgba(255, 0, 127, 0.15);
+        transform: translateY(-5px);
+    }
+    
+    /* Customize Streamlit File Uploader Box */
+    [data-testid="stFileUploader"] {
+        background: rgba(15, 22, 42, 0.4) !important;
+        border: 1px dashed rgba(0, 243, 255, 0.3) !important;
+        border-radius: 16px !important;
+        padding: 10px !important;
+        transition: all 0.3s ease !important;
+    }
+    [data-testid="stFileUploader"]:hover {
+        border-color: rgba(0, 243, 255, 0.7) !important;
+        background: rgba(15, 22, 42, 0.6) !important;
     }
     
     /* Futuristic Headers */
@@ -309,21 +330,24 @@ st.markdown("""
     
     /* Custom buttons override with scaling and transition */
     .stButton>button {
-        background: linear-gradient(135deg, #00f3ff 0%, #0088cc 100%) !important;
-        color: #0d0e15 !important;
+        background: linear-gradient(135deg, #00f3ff 0%, #0077b6 100%) !important;
+        color: #050608 !important;
         font-family: 'Space Grotesk', sans-serif !important;
         font-weight: 700 !important;
+        text-transform: uppercase;
+        letter-spacing: 1px;
         border: none !important;
-        border-radius: 10px !important;
-        padding: 10px 24px !important;
-        box-shadow: 0 4px 15px rgba(0, 243, 255, 0.3) !important;
+        border-radius: 12px !important;
+        padding: 12px 28px !important;
+        box-shadow: 0 4px 20px rgba(0, 243, 255, 0.25) !important;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         width: 100%;
     }
     .stButton>button:hover {
         transform: translateY(-2px) !important;
-        box-shadow: 0 6px 20px rgba(0, 243, 255, 0.5) !important;
+        box-shadow: 0 6px 25px rgba(0, 243, 255, 0.45) !important;
         color: #ffffff !important;
+        background: linear-gradient(135deg, #00f3ff 0%, #00b4d8 100%) !important;
     }
     
     /* Code tag override styling */
